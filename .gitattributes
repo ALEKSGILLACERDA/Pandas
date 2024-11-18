@@ -1,2 +1,140 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+import pandas as pd
+import matplotlib.pyplot as plt
+from google.colab import drive
+
+drive.mount('/content/drive')
+
+file_path = '/content/drive/My Drive/mt_cars.csv'  
+df = pd.read_csv(file_path)
+df = df.rename(columns={'Unnamed: 0': 'model'})
+df_ordenado_mpg = df.sort_values(by=['mpg'], ascending=False)
+colunas_para_media = [
+  'mpg', 'cyl', 'disp', 'hp', 
+  'drat', 'wt', 'qsec', 'vs', 
+  'am', 'gear', 'carb'
+  ] 
+df['media'] = df[colunas_para_media].mean(axis=1)
+frequencia_carb = df['carb'].value_counts()
+frequencia_vs = df['vs'].value_counts()
+df_ordenado_media = df.sort_values(by=['media'], ascending=False)
+frequencia_am = df['am'].value_counts()
+frequencia_gear = df['gear'].value_counts()
+frequencia_cyl = df['cyl'].value_counts()
+print(df.head())
+
+df_ordenado_cyl = df.sort_values(by=['cyl'], ascending=False)
+print(df_ordenado_cyl.head())
+
+df_ordenado_disp = df.sort_values(by=['disp'], ascending=False)
+print(df_ordenado_disp.head())
+
+df_ordenado_hp = df.sort_values(by=['hp'], ascending=False)
+print(df_ordenado_hp.head())
+
+df_ordenado_drat = df.sort_values(by=['drat'], ascending=False)
+print(df_ordenado_drat.head())
+
+df_ordenado_wt = df.sort_values(by=['wt'], ascending=False)
+print(df_ordenado_wt.head())
+
+df_ordenado_qsec = df.sort_values(by=['qsec'], ascending=False)
+print(df_ordenado_qsec.head())
+
+df_ordenado_vs = df.sort_values(by=['vs'], ascending=False)
+print(df_ordenado_vs.head())
+
+df_ordenado_am = df.sort_values(by=['am'], ascending=False)
+print(df_ordenado_am.head())
+
+df_ordenado_gear = df.sort_values(by=['gear'], ascending=False)
+print(df_ordenado_gear.head())
+
+df_ordenado_carb = df.sort_values(by=['carb'], ascending=False)
+print(df_ordenado_carb.head())
+
+
+
+
+plt.figure(figsize=(10, 6))
+plt.bar(df_ordenado_mpg['model'], df_ordenado_mpg['mpg'])
+plt.xlabel('Modelo')
+plt.ylabel('MPG')
+plt.title('Gráfico de Barras de MPG por Modelo de carros (do maior para o menor)')
+plt.xticks(rotation=90)
+plt.show()
+
+
+plt.figure(figsize=(8, 8))
+plt.pie(frequencia_cyl, labels=frequencia_cyl.index, autopct='%1.1f%%', startangle=90)
+plt.title('Distribuição dos Valores da Coluna "cyl"')
+plt.show()
+
+plt.figure(figsize=(10, 6))
+plt.bar(df_ordenado_disp['model'], df_ordenado_disp['disp'])
+plt.xlabel('Modelo')
+plt.ylabel('Deslocamento')
+plt.title('Gráfico de Barras de Deslocamento por Modelo de carros (do maior para o menor)')
+plt.xticks(rotation=90)
+plt.show()
+
+plt.figure(figsize=(10, 6))
+plt.bar(df_ordenado_hp['model'], df_ordenado_hp['hp'])
+plt.xlabel('Modelo')
+plt.ylabel('HP')
+plt.title('Gráfico de Barras de HP por Modelo de carros (do maior para o menor)')
+plt.xticks(rotation=90)
+plt.show()
+
+plt.figure(figsize=(10, 6))
+plt.bar(df_ordenado_drat['model'], df_ordenado_drat['drat'])
+plt.xlabel('Modelo')
+plt.ylabel('Drat')
+plt.title('Gráfico de Barras de Drat por Modelo de carros (do maior para o menor)')
+plt.xticks(rotation=90)
+plt.show()
+
+plt.figure(figsize=(10, 6))
+plt.bar(df_ordenado_wt['model'], df_ordenado_wt['wt'])
+plt.xlabel('Modelo')
+plt.ylabel('WT')
+plt.title('Gráfico de Barras de WT por Modelo de carros (do maior para o menor)')
+plt.xticks(rotation=90)
+plt.show()
+
+plt.figure(figsize=(10, 6))
+plt.bar(df_ordenado_qsec['model'], df_ordenado_qsec['qsec'])
+plt.xlabel('Modelo')
+plt.ylabel('Qsec')
+plt.title('Gráfico de Barras de Qsec por Modelo de carros (do maior para o menor)')
+plt.xticks(rotation=90)
+plt.show()
+
+plt.figure(figsize=(8, 8))
+plt.pie(frequencia_vs, labels=frequencia_vs.index, autopct='%1.1f%%', startangle=90)
+plt.title('Distribuição dos Valores da Coluna "vs"')
+plt.show()
+
+plt.figure(figsize=(8, 8))
+plt.pie(frequencia_am, labels=frequencia_am.index, autopct='%1.1f%%', startangle=90)
+plt.title('Distribuição dos Valores da Coluna "am"')
+plt.show()
+
+plt.figure(figsize=(8, 8))
+plt.pie(frequencia_gear, labels=frequencia_gear.index, autopct='%1.1f%%', startangle=90)
+plt.title('Distribuição dos Valores da Coluna "gear"')
+plt.show()
+
+
+
+plt.figure(figsize=(8, 8))
+plt.pie(frequencia_carb, labels=frequencia_carb.index, autopct='%1.1f%%', startangle=90)
+plt.title('Distribuição dos Valores da Coluna "carb"')
+plt.show()
+
+plt.figure(figsize=(10, 6))
+plt.bar(df_ordenado_media['model'], df_ordenado_media['media'])  
+plt.xlabel('Modelo')
+plt.ylabel('Média')
+plt.title('Gráfico de Barras da Média das Variáveis por Modelo')
+plt.xticks(rotation=90)
+plt.show()
